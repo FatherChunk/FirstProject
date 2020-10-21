@@ -10,6 +10,15 @@ AFloater::AFloater()
 	PrimaryActorTick.bCanEverTick = true;
 
 	StaticMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("CustomStaticMesh"));
+
+	InitialLocation = FVector(0.0f);
+	PlacedLocation = FVector(0.0f);
+	WorldOrigin = FVector(0.0f, 0.0f, 0.0f);
+
+	InitialDirection = FVector(0.0f, 0.0f, 0.0f);
+
+	bInitialiseFloaterLocations = false;
+	bShouldFloat = false;
 }
 
 // Called when the game starts or when spawned
@@ -17,9 +26,13 @@ void AFloater::BeginPlay()
 {
 	Super::BeginPlay();
 
-	FVector InitialLocation = FVector(0.0f, 0.0f, 0.0f);
+	PlacedLocation = GetActorLocation();
 
-	SetActorLocation(InitialLocation);
+	if (bInitialiseFloaterLocations)
+	{
+		SetActorLocation(InitialLocation);
+	}
+	
 	
 }
 
@@ -27,6 +40,12 @@ void AFloater::BeginPlay()
 void AFloater::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	if (bShouldFloat)
+	{
+		FHitResult HitResult;
+		AddActorLocalOffset(InitialDirection, false, &HitResult);
+	}
 
 }
 
