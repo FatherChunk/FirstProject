@@ -16,6 +16,10 @@ AFloater::AFloater()
 void AFloater::BeginPlay()
 {
 	Super::BeginPlay();
+
+	FVector InitialLocation = FVector(0.0f, 0.0f, 0.0f);
+
+	SetActorLocation(InitialLocation);
 	
 }
 
