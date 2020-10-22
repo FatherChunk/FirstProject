@@ -46,6 +46,28 @@ public:
 	UPROPERTY(EditInstanceOnly, BlueprintReadWrite, Category = "Floater Variables")
 	FVector InitialTorque;
 
+private:
+
+	float RunningTime;
+
+	float BaseZLocation;
+public:
+	//Amplitude
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Floater Variables")
+	float A;
+	
+	//Period
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Floater Variables")
+	float B;
+	
+	//Phase Shift
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Floater Variables")
+	float C;
+	
+	//Vertical Shift
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Floater Variables")
+	float D;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
