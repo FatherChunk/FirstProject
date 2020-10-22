@@ -29,6 +29,16 @@ void AFloater::BeginPlay()
 {
 	Super::BeginPlay();
 
+	float InitialX = FMath::FRandRange(-500.f, 500.f);
+	float InitialY = FMath::FRandRange(-500.f, 500.f); 
+	float InitialZ = FMath::FRandRange(0.0f, 500.f);
+
+	InitialLocation.X = InitialX;
+	InitialLocation.Y = InitialY;
+	InitialLocation.Z = InitialZ;
+
+	
+
 	PlacedLocation = GetActorLocation();
 
 	if (bInitialiseFloaterLocations)
