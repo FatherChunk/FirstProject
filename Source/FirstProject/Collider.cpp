@@ -7,6 +7,7 @@
 #include "Components/StaticMeshComponent.h"
 #include "Components/InputComponent.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "ColliderMovementComponent.h"
 
 // Sets default values
 ACollider::ACollider()
@@ -14,15 +15,25 @@ ACollider::ACollider()
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
+	//RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
 
 	SphereComponent = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComponent"));
+	SetRootComponent(SphereComponent);
 	SphereComponent->SetupAttachment(GetRootComponent());
+	
 	SphereComponent->InitSphereRadius(40.f);
 	SphereComponent->SetCollisionProfileName(TEXT("Pawn"));
 
 	MeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComponent"));
 	MeshComponent->SetupAttachment(GetRootComponent());
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> MeshComponentAsset(TEXT("StaticMesh'/Game/StarterContent/Shapes/Shape_Sphere.Shape_Sphere'"));
+	if (MeshComponentAsset.Succeeded())
+	{
+		MeshComponent->SetStaticMesh(MeshComponentAsset.Object);
+		MeshComponent->SetRelativeLocation(FVector(0.f, 0.f, -40.f));
+		MeshComponent->SetWorldScale3D(FVector(0.8f, 0.8f, 0.8f));
+	}
+
 
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
 	SpringArm->SetupAttachment(GetRootComponent());
@@ -33,6 +44,9 @@ ACollider::ACollider()
 
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	Camera->SetupAttachment(SpringArm, USpringArmComponent::SocketName);
+
+	OurMovementComponent = CreateDefaultSubobject<UColliderMovementComponent>(TEXT("OurMovementComponent"));
+	OurMovementComponent->UpdatedComponent = RootComponent;
 	
 	AutoPossessPlayer = EAutoReceiveInput::Player0;
 
@@ -66,11 +80,23 @@ void ACollider::MoveForward(float input)
 {
 	FVector Forward = GetActorForwardVector();
 	AddMovementInput(input * Forward);
+	if (OurMovementComponent)
+	{
+		OurMovementComponent->AddInputVector(Forward * input);
+	}
 }
 
 void ACollider::MoveRight(float input)
 {
 	FVector Right = GetActorRightVector();
 	AddMovementInput(input * Right);
+	if (OurMovementComponent)
+	{
+		OurMovementComponent->AddInputVector(Right * input);
+	}
 }
 
+UPawnMovementComponent* ACollider::GetMovementComponent() const
+{
+	return OurMovementComponent;
+}
