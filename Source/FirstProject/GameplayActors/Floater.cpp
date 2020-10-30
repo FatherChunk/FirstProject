@@ -90,7 +90,7 @@ void AFloater::Tick(float DeltaTime)
 		//UE_LOG(LogTemp, Warning, TEXT("Hit Location: X = %f, Y = %f, Z = %f"), HitLocation.X, HitLocation.Y, HitLocation.Z);
 	}
 
-	//FRotator Rotation = FRotator(0.0f, 0.0f, 1.0f);
+	FRotator Rotation = FRotator(0.0f, 0.0f, 1.0f);
 	
 	//AddActorWorldRotation(Rotation);
 }
