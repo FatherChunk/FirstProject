@@ -87,4 +87,13 @@ Content/Maps*
 Content/Character*
 
 #Effects
-Content/InfinityBladeEffects
+Content/InfinityBladeEffects*
+
+#Example Content
+Content/ExampleContent*
+
+#Sounds
+Content/Sounds*
+
+#Demoroom
+Content/DemoRoom*
