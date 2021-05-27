@@ -18,6 +18,18 @@ public:
 	// Base shape collision
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Item | Collision")
 	class USphereComponent* CollisionVolume;
+	// base static mesh for the object
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Item | Mesh")
+	class UStaticMeshComponent* Mesh; //pointer to the static mesh component
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item | Particles")
+	class UParticleSystemComponent* IdleParticlesComponent; //pointer to particle system component
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item | Particles")
+	class UParticleSystem* OverlapParticles;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item | Sounds")
+	class USoundCue* OverlapSound;
 
 protected:
 	// Called when the game starts or when spawned
