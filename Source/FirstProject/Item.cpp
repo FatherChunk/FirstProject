@@ -24,6 +24,9 @@ AItem::AItem()
 	IdleParticlesComponent = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("Particles")); //initialises the particle system
 	IdleParticlesComponent->SetupAttachment(GetRootComponent()); // Attaches to root
 	
+	bRotate = false;
+
+	RotationRate = 45.f;
 
 }
 
@@ -41,6 +44,13 @@ void AItem::BeginPlay()
 void AItem::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	if (bRotate)
+	{
+		FRotator Rotation = GetActorRotation(); // Get current rotation 
+		Rotation.Yaw += DeltaTime * RotationRate; // Setting Rotation in the Z axis (Yaw) equal to time * rate for consistent rotation rate
+		SetActorRotation(Rotation); // Set the rotation by passing in the rotation rate set in the line above
+	}
 
 }
 

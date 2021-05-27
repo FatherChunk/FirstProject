@@ -26,10 +26,16 @@ public:
 	class UParticleSystemComponent* IdleParticlesComponent; //pointer to particle system component
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item | Particles")
-	class UParticleSystem* OverlapParticles;
+	class UParticleSystem* OverlapParticles; // pointer to particle system
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item | Sounds")
-	class USoundCue* OverlapSound;
+	class USoundCue* OverlapSound; //pointer to sound cue
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item | ItemProperties")
+	bool bRotate; // boolean to switch on or off rotation
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item | ItemProperties")
+	float RotationRate; //rate of rotation for pickup
 
 protected:
 	// Called when the game starts or when spawned
