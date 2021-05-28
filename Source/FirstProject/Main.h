@@ -53,6 +53,12 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player Stats")
 	int32 Coins;
 
+	void DecrementHealth(float Amount);
+
+	void IncrementCoins(int32 Amount);
+
+	void Die();
+
 
 protected:
 	// Called when the game starts or when spawned

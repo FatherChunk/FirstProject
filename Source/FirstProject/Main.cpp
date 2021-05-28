@@ -52,6 +52,8 @@ AMain::AMain()
 	Coins = 0;
 }
 
+
+
 // Called when the game starts or when spawned
 void AMain::BeginPlay()
 {
@@ -121,4 +123,27 @@ void AMain::TurnAtRate(float Rate)
 void AMain::LookUpAtRate(float Rate)
 {
 	AddControllerPitchInput(Rate * BaseLookUpRate * GetWorld()->GetDeltaSeconds());
+}
+
+void AMain::DecrementHealth(float Amount)
+{
+	if (Health - Amount <= 0.f) // checks to see if health is greater than 0
+	{
+		Health -= Amount;
+		Die();
+	}
+	else
+	{
+		Health -= Amount;
+	}
+}
+
+void AMain::IncrementCoins(int32 Amount)
+{
+	Coins += Amount;
+}
+
+void AMain::Die()
+{
+
 }
