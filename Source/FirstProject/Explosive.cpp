@@ -21,6 +21,8 @@ void AExplosive::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor
 		if (Main)
 		{
 			Main->DecrementHealth(Damage); // calls to decrement health function in main, passing in damage amount
+
+			Destroy();
 		}
 	}
 }
