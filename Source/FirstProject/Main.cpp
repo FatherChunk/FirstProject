@@ -8,6 +8,7 @@
 #include "Engine/World.h"
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Kismet/KismetSystemLibrary.h"
 
 // Sets default values
 AMain::AMain()
@@ -70,6 +71,8 @@ AMain::AMain()
 void AMain::BeginPlay()
 {
 	Super::BeginPlay();
+
+	
 	
 }
 
@@ -252,6 +255,8 @@ void AMain::Die()
 
 }
 
+
+
 void AMain::SetMovementStatus(EMovementStatus Status)
 {
 	MovementStatus = Status;
@@ -274,3 +279,14 @@ void AMain::ShiftKeyUp()
 {
 	bShiftKeyDown = false;
 }
+
+void AMain::ShowPickLocations()
+{
+	for (int32 i = 0; i < PickupLocations.Num(); i++)
+	{
+		UKismetSystemLibrary::DrawDebugSphere(this, PickupLocations[i], 25.f, 24, FLinearColor::Red, 15.f, 0.5f);
+	}
+}
+
+
+	
